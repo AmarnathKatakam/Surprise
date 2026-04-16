@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Surprise 🎬</title>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Intro text */
+    #intro {
+      font-size: 28px;
+      opacity: 0;
+      animation: fadeInOut 4s ease forwards;
+      text-align: center;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: scale(0.9); }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+
+    /* Final content */
+    #content {
+      position: absolute;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1.5s ease;
+    }
+
+    #content.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 34px;
+      color: #ff4b5c;
+    }
+
+    img {
+      width: 260px;
+      border-radius: 15px;
+      box-shadow: 0 10px 40px rgba(255,75,92,0.4);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🎬 Intro -->
+<div id="intro">
+  ✨ Something special is waiting for you... 💖
+</div>
+
+<!-- 💖 Final Reveal -->
+<div id="content">
+  <h1>Chandana 💖</h1>
+  <img src="photo.jpeg" alt="Photo">
+</div>
+
+<!-- 🎶 Background Music -->
+<audio id="music" autoplay loop>
+  <source src="music.mpeg" type="audio/mpeg">
+</audio>
+
+<script>
+  // 🎉 Confetti Rain
+  function startConfettiRain() {
+    setInterval(() => {
+      confetti({
+        particleCount: 6,
+        spread: 360,
+        startVelocity: 25,
+        ticks: 60,
+        origin: {
+          x: Math.random(),
+          y: 0
+        }
+      });
+    }, 200);
+  }
+
+  // 🎭 Reveal after intro
+  setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+    const content = document.getElementById("content");
+    content.classList.add("show");
+  }, 4000);
+
+  // Start confetti
+  startConfettiRain();
+
+  // 🔊 Ensure music plays (mobile fix)
+  document.body.addEventListener("click", () => {
+    document.getElementById("music").play();
+  });
+</script>
+
+</body>
+</html>
